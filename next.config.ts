@@ -21,15 +21,18 @@ const nextConfig: NextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  turbopack: {
-    rules: {
-      "*.{jsx,tsx}": {
-        loaders: [LOADER]
-      }
-    }
   }
 };
+
+if (process.env.NODE_ENV !== 'production') {
+   (nextConfig as any).turbopack = {
+      rules: {
+        "*.{jsx,tsx}": {
+          loaders: [LOADER]
+        }
+      }
+    };
+}
 
 export default nextConfig;
 // Orchids restart: 1769848277285
